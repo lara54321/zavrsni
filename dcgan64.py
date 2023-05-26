@@ -145,7 +145,8 @@ if __name__ == '__main__':
         help="learning rate for training")
     ap.add_argument("-lower_lr", "--lower-learning-rate", type=int, default=500,
         help="lower learning rate at certain iteration")
-    args = vars(ap.parse_args())
+    ap.add_argument("-g", "--g_faster", type=int, default=3,
+        help="generator learning faster")
     args = vars(ap.parse_args())
 
     # store the epochs and batch size in convenience variables
@@ -154,6 +155,7 @@ if __name__ == '__main__':
     image_size = args["image_size"]
     lr = args["learning_rate"]
     lower_lr = args["lower_learning_rate"]
+    g = args["g_faster"]
     #print(num_epochs, batch_size, image_size, lr)
 
     # We can use an image folder dataset the way we have it setup.
@@ -248,7 +250,7 @@ if __name__ == '__main__':
 
     # Setup Adam optimizers for both G and D
     Glr = lr
-    Dlr = lr * 3
+    Dlr = lr * g
     optimizerD = optim.Adam(netD.parameters(), lr=Glr, betas=(beta1, 0.999))
     optimizerG = optim.Adam(netG.parameters(), lr=Dlr, betas=(beta1, 0.999))
 
