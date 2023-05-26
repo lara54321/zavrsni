@@ -268,8 +268,8 @@ if __name__ == '__main__':
 
             if iters % lower_lr == 0 and iters != 0:
             # # Lower the learning rate
-                Glr = Glr * 0.1
-                Dlr = Dlr * 0.1
+                Glr = Glr * 0.001
+                Dlr = Dlr * 0.001
                 optimizerD = optim.Adam(netD.parameters(), lr=Glr, betas=(beta1, 0.999))
                 optimizerG = optim.Adam(netG.parameters(), lr=Dlr, betas=(beta1, 0.999))
                 print('Lowering learning rate.')
