@@ -200,6 +200,10 @@ if __name__ == '__main__':
     plt.title("Training Images")
     plt.imshow(np.transpose(vutils.make_grid(real_batch[0].to(device)[:64], padding=2, normalize=True).cpu(),(1,2,0)))
 
+    # check if there is output dir
+    if not os.path.exists('output_64/'):
+        os.makedirs('output_64/')
+
     # Create the generator
     netG = Generator(ngpu).to(device)
 
