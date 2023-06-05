@@ -1,5 +1,3 @@
-from __future__ import print_function
-#%matplotlib inline
 import argparse
 import os
 import random
@@ -96,17 +94,10 @@ if __name__ == '__main__':
     torch.manual_seed(manualSeed)
 
     # Root directory for dataset
-    dataroot = "images"
+    dataroot = "images_128"
 
     # Number of workers for dataloader
     workers = 2
-
-    # # Batch size during training
-    # batch_size = 128
-
-    # # Spatial size of training images. All images will be resized to this
-    # #   size using a transformer.
-    # image_size = 64
 
     # Number of channels in the training images. For color images this is 3
     nc = 3
@@ -338,11 +329,15 @@ if __name__ == '__main__':
             iters += 1
 
             # Check how the generator is doing by saving G's output on fixed_noise
-        if (epoch % 2 == 0) or (epoch == num_epochs-1):
+        if (epoch % 5 == 0) or (epoch == num_epochs-1):
             with torch.no_grad():
                 fake = netG(fixed_noise).detach().cpu()
                 img_list.append(vutils.make_grid(fake, padding=2, normalize=True))
                 vutils.save_image(img_list[-1], f"output_64/generated_images_{epoch}.png", normalize=True)
+        if (epoch % 20 == 0) or (epoch == num_epochs-1):
+            with torch.no_grad():
+                fake = netG(fixed_noise).detach().cpu()
+                vutils.save_image(fake[0], f"output_64/single/generated_images_{epoch}.png", normalize=True)
 
 
     plt.figure(figsize=(10,5))
