@@ -152,9 +152,9 @@ if __name__ == '__main__':
     #     help="path to output directory")
     ap.add_argument("-e", "--epochs", type=int, default=500,
         help="#epochs to train for")
-    ap.add_argument("-b", "--batch-size", type=int, default=256,
+    ap.add_argument("-b", "--batch-size", type=int, default=128,
         help="batch size for training")
-    ap.add_argument("-s", "--image-size", type=int, default=64,
+    ap.add_argument("-s", "--image-size", type=int, default=256,
         help="batch size for training")
     ap.add_argument("-lr", "--learning-rate", type=float, default=0.0001,
         help="learning rate for training")
@@ -358,7 +358,7 @@ if __name__ == '__main__':
             with torch.no_grad():
                 fake = netG(fixed_noise).detach().cpu()
                 img_list.append(vutils.make_grid(fake, padding=2, normalize=True))
-                vutils.save_image(img_list[-1], f"output_128/generated_images_{epoch}.png", normalize=True)
+                vutils.save_image(img_list[-1], f"output_256/generated_images_{epoch}.png", normalize=True)
         if (epoch % 20 == 0) or (epoch == num_epochs-1):
             with torch.no_grad():
                 fake = netG(fixed_noise).detach().cpu()
