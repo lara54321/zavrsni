@@ -167,8 +167,8 @@ if __name__ == '__main__':
             # # Lower the learning rate
                 Glr = Glr * 0.001
                 Dlr = Dlr * 0.001
-                optimizerD = optim.RMSprop(netD.parameters(), lr=Glr, betas=(beta1, 0.999))
-                optimizerG = optim.RMSprop(netG.parameters(), lr=Dlr, betas=(beta1, 0.999))
+                optimizerD = optim.RMSprop(netD.parameters(), lr=Glr)
+                optimizerG = optim.RMSprop(netG.parameters(), lr=Dlr)
                 print('Lowering learning rate.')
 
             ###########################

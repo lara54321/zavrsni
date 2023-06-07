@@ -234,6 +234,12 @@ if __name__ == '__main__':
             errG.backward()
             optimizerG.step()
 
+            if i % 50 == 0:
+                print(f"[Epoch {epoch}/{num_epochs}] [Batch {i}/{len(dataloader)}] "
+                      f"Loss_D: {errD.item():.4f} Loss_G: {errG.item():.4f}")
+                print(f"[Epoch {epoch}/{num_epochs}] [Batch {i}/{len(dataloader)}] "
+                      f"Wasserstein Distance: {wasserstein_distance:.4f}")
+
             # Save Losses for plotting later
             G_losses.append(errG.item())
             D_losses.append(errD.item())
