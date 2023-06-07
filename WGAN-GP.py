@@ -268,22 +268,22 @@ if __name__ == '__main__':
                     fake = netG(fixed_noise).detach().cpu()
                     vutils.save_image(fake[0], f"output_gp/single/generated_images_{epoch}.png", normalize=True)
 
-        # Plot the training losses
-        plt.figure(figsize=(10, 5))
-        plt.title("Generator and Discriminator Loss During Training")
-        plt.plot(G_losses, label="Generator")
-        plt.plot(D_losses, label="Discriminator")
-        plt.xlabel("Iterations")
-        plt.ylabel("Loss")
-        plt.legend()
-        plt.show()
+    # Plot the training losses
+    plt.figure(figsize=(10, 5))
+    plt.title("Generator and Discriminator Loss During Training")
+    plt.plot(G_losses, label="Generator")
+    plt.plot(D_losses, label="Discriminator")
+    plt.xlabel("Iterations")
+    plt.ylabel("Loss")
+    plt.legend()
+    plt.show()
 
-        # Animation showing the generated images over time
-        fig = plt.figure(figsize=(8, 8))
-        plt.axis("off")
-        ims = [[plt.imshow(np.transpose(i, (1, 2, 0)), animated=True)] for i in img_list]
-        ani = animation.ArtistAnimation(fig, ims, interval=1000, repeat_delay=1000, blit=True)
-        HTML(ani.to_jshtml())
+    # Animation showing the generated images over time
+    fig = plt.figure(figsize=(8, 8))
+    plt.axis("off")
+    ims = [[plt.imshow(np.transpose(i, (1, 2, 0)), animated=True)] for i in img_list]
+    ani = animation.ArtistAnimation(fig, ims, interval=1000, repeat_delay=1000, blit=True)
+    HTML(ani.to_jshtml())
 
-        # Save the generator model
-        torch.save(netG.state_dict(), "WGAN_GP_generator.pth")
+    # Save the generator model
+    torch.save(netG.state_dict(), "WGAN_GP_generator.pth")
